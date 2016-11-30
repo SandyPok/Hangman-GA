@@ -1,0 +1,15 @@
+body {
+  font-family: 'Acme';
+  text-align: center;
+  font-size: 30px;
+}
+h1 {
+  font-size: 110px;
+  font-family: 'Frijole';
+  margin-top: 1px;
+}
+.firstPage {
+    display: none;
+    height: 460px;
+    width: 845px;
+}
