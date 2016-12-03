@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Acme|Frijole" rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Acme|Frijole" rel="stylesheet">
         <title>Hangman</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="main.js"></script>
-  </head>
-  <body>
-    <h1>Hangman</h1>
-    <div id="board">
-      <div id="userInput">
-        <input type="text" name="word" id="word"/>
-        <button type="button" class="userWord">Submit</button>
-      </div></div>
+        <script type="text/javascript" src="script.js"></script>
+    </head>
 
-    <div id="intro">
-      <p>Select single player or multiplayer to begin!</p>
-          <div id="buttonContainer">
-            <button type="button" name="singleplayer">Single Player</button>
-            <button type="button" name="multiplayer">Multiplayer</button>
-          </div>
-    <div id="firstPage">
-      <p>Pick a category:</p>
-      <div id="categoryHolder">
-          <div id="category">
-              <div id="category1">
-                <button type="button" name="phrases">Phrases</button>
-                <button type="button" name="songs">Songs</button>
+    <body>
+        <h1>Hangman</h1>
+
+        <!-- Mainpage Div Container -->
+        <div id="board">
+            <div id="intro">
+                <p>Select single player or multiplayer to begin!</p>
+
+                <div id="buttonContainer">
+                    <button id="singeplayerButton" type="button" name="singleplayer">Single Player</button>
+                    <button id="multiplayerButton" type="button" name="multiplayer">Multiplayer</button>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </body>
+
+        <!-- Singleplayer Div Container -->
+        <div id="singleplayer">
+            <p>Single Player</p>
+            <div id="firstPage">
+                <p>Pick a category:</p>
+
+                <div id="categoryHolder">
+                    <button id="phraseButton" type="button" name="phrases">Phrases</button>
+                    <button id="songButton" type="button" name="songs">Songs</button>
+                    <button class="backButton" type="button">Back</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Singleplayer Div Container -->
+        <div id="singleplayerBoard">
+            <p>Number of Tries: <span class="numberOfTries">0</span></p>
+            <button class="backButton">Back</button>
+        </div>
+
+        <!-- Multiplayer Div Container -->
+        <div id="multiplayer">
+            <p>Multiplayer</p>
+            <div id="userInput">
+                <input type="text" name="word" id="word"/>
+                <button id="getWord" type="button">Submit</button>
+            </div>
+            <button class="backButton" type="button">Back</button>
+        </div>
+
+        <!-- Multiplayer Board Div Container-->
+        <div id="multiplayerBoard">
+            <p>Number of Tries: <span class="numberOfTries"></span></p>
+            <div id="generateWord">
+
+            </div>
+            <button class="backButton">Back</button>
+        </div>
+    </body>
 </html>

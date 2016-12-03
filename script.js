@@ -1,24 +1,127 @@
-$(document).ready(); {
-let userWord = 0;
-let word = 0;
-let phraseLength = 0;
-let phrases = ["Early bird gets the worm", "Read between the lines", "I can eat a horse", "Twenty-four seven", "Cat got your tounge", "One in one million", "I beg to differ", "Easier said than done", "Add insult to injury", "Don't cry over spilled milk", "Curiosity killed the cat", "Two peas in a pod", "That's the last straw", "Piece of cake", "Speak of the devil", "Go the whole nine yards", "An eye for an eye", "Hit the hay", "Stab someone in the back", "Quit cold turkey", "Cut to the chase", "Best of both worlds", "Kill two birds with one stone", "Break a leg", "Hit the nail on the head", "Kick the bucket"];
-let songs = ["I came in like a wrecking ball", "Work, work, work, work, work", "Just a small town girl", "I still haven't found what I'm looking for", "Is this the real life? Is this just fantasy?", "We don't need no education", "Have you ever seen the rain?", "I don't want to miss a thing", "Take my hand, we'll make it, I swear", "That's me in the corner", "Another one bites the dust", "Eye of the tiger", "Hello darkness my old friend", "Somewhere over the rainbow blue birds fly", "Don't worry about a thing", "Imagine there's no heaven", "Can you feel the love tonight?"];
-}
+$(document).ready();
 
-function createLetterHolders(userWord) {
-  for(let i = 0; i < userWord.length; i++) {
-  }
-}
+  $(function() {
+   var singleplayerContainer = $('#singleplayer').css({"display": "none"});
+   var singleplayerBoardContainer = $('#singleplayerBoard').css({"display":"none"});
 
-function singleplayer(){
-    document.getElementById('introPage').style.display = "none";
-    document.getElementById('multiPage').style.display = "none";
-    document.getElementById('singlePage').style.display = "block";
-}
+   var multiplayerContainer = $('#multiplayer').css({"display": "none"});
+   var multiplayerBoardContainer = $('#multiplayerBoard').css({"display":"none"});
 
-function multiplayer(){
-    document.getElementById('introPage').style.display = "none";
-    document.getElementById('singlePage').style.display = "none";
-    document.getElementById('multiPage').style.display = "block";
-}
+   var openingTag = '<div class="letter-border"><div class="letter-holder"><span class="letter">';
+   var closingTag = '</span></div></div>';
+
+   var words = ["Hello", "Test", "Potato"];
+   var numberOfTries = 7;
+
+   function clearBoard() {
+      $('#singleplayer').css({"display":"none"});
+      $('#multiplayer').css({"display":"none"});
+   }
+
+   function resetBoard() {
+      clearBoard();
+      $('#multiplayer').css({"display": "none"});
+      $('#multiplayerBoard').css({"display":"none"});
+   }
+
+   $('#asd').attr('');
+
+   function categoryPhrase() {
+      console.log("Category");
+   }
+
+   function categorySongs() {
+      console.log("Songs");
+   }
+   //.attr("data-letter", element
+   function drawWord(getWord) {
+      getWord.split("").forEach(function(element) {
+         $('#generateWord').append(openingTag + element.toUpperCase() + closingTag);
+      });
+
+      for (var i = 0; i < getWord.length; i++) {
+         console.log($('#generateWord').children(".letter-border")[i]);
+      }
+
+      for (var j = 0; j < getWord.length; j++) {
+         $('.letter-border:nth-child(' + j + ')').attr('data-letter', getWord[j]);
+      }
+
+      console.log($('.letter-border:nth-child(0)'));
+
+   }
+
+   function drawScore() {
+      $('.numberOfTries').append(document.createTextNode(numberOfTries));
+   }
+
+   $('#getWord').on('click', function(e) {
+      e.preventDefault();
+      //Clean up previous game
+      $('#generateWord').empty();
+      $('.numberOfTries').empty();
+
+      // Gets the word input
+      var playerWordInput = $('#word').val();
+
+      // Display the multiplayer div board
+      $('#multiplayerBoard').css({"display":"block"});
+      clearBoard();
+
+      //Clear the input box
+      $('#word').val("");
+
+      //Draws the word
+      drawWord(playerWordInput);
+      drawScore();
+   });
+
+   $('#singeplayerButton').on('click', function(e){
+      e.preventDefault();
+      $('#board').css({"display":"none"});
+      $('#singleplayer').css({"display": "block"});
+   });
+
+   $('#multiplayerButton').on('click', function(e) {
+      e.preventDefault();
+      $('#board').css({"display": "none"});
+      $('#multiplayer').css({"display": "block"});
+   });
+
+   $('.backButton').on('click', function(e) {
+      e.preventDefault();
+      resetBoard();
+      $('#board').css({"display":"block"});
+   });
+
+   $('#phraseButton').on('click', function(e) {
+      e.preventDefault();
+      console.log("phrase button");
+   });
+
+   $('#songButton').on('click', function(e) {
+      e.preventDefault();
+      console.log('song button');
+   });
+});
+
+$(function() {
+  counter = 0;
+
+  $('#personHead').css({'display':'none'});
+  $('#personBody').css({'display':'none'});
+
+  $('#triggerEvent').on('click', function(e) {
+    e.preventDefault();
+    counter++;
+
+    switch(counter) {
+      case 1:
+        $('#personHead').css({'display':'block'});
+        break;
+      case 2:
+        $('#personBody').css({'display':'block'});
+        break;
+    }
+  });
+});
