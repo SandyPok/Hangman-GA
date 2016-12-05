@@ -1,6 +1,4 @@
-$(document).ready();
-
-  $(function() {
+$(function() {
    var singleplayerContainer = $('#singleplayer').css({"display": "none"});
    var singleplayerBoardContainer = $('#singleplayerBoard').css({"display":"none"});
 
@@ -24,8 +22,6 @@ $(document).ready();
       $('#multiplayerBoard').css({"display":"none"});
    }
 
-   $('#asd').attr('');
-
    function categoryPhrase() {
       console.log("Category");
    }
@@ -33,22 +29,39 @@ $(document).ready();
    function categorySongs() {
       console.log("Songs");
    }
-   //.attr("data-letter", element
+
    function drawWord(getWord) {
-      getWord.split("").forEach(function(element) {
+      getWord.split('').forEach(function(element) {
          $('#generateWord').append(openingTag + element.toUpperCase() + closingTag);
       });
 
-      for (var i = 0; i < getWord.length; i++) {
-         console.log($('#generateWord').children(".letter-border")[i]);
+      for (var j = 1; j <= getWord.length; j++) {
+         $('div .letter-holder:nth-child(' + j + ')').attr('data-letter', getWord[j-1]);
+
       }
+        $('.letter').hide();
+   }
 
-      for (var j = 0; j < getWord.length; j++) {
-         $('.letter-border:nth-child(' + j + ')').attr('data-letter', getWord[j]);
+   function drawAlphabet() {
+      var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+         "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+      alphabet.forEach(function(element) {
+         $('#alphabet').append('<div class="letter">' + element + '</div>');
+      });
+      $('#alphabet .letter').on('click', function(e) {
+        let match = false;
+        for (let l in playerWordInput) {
+          if($(this).text().toUpperCase() === playerWordInput[l].toUpperCase()) {
+           $('span.letter').eq(l).show();
+           match = true
+        }
       }
-
-      console.log($('.letter-border:nth-child(0)'));
-
+      if(!match) {
+        numberOfTries--;
+        $(".numberOfTries").html(numberOfTries);
+      }
+      });
    }
 
    function drawScore() {
@@ -61,8 +74,7 @@ $(document).ready();
       $('#generateWord').empty();
       $('.numberOfTries').empty();
 
-      // Gets the word input
-      var playerWordInput = $('#word').val();
+      playerWordInput = $('#word').val();
 
       // Display the multiplayer div board
       $('#multiplayerBoard').css({"display":"block"});
@@ -74,6 +86,7 @@ $(document).ready();
       //Draws the word
       drawWord(playerWordInput);
       drawScore();
+      drawAlphabet();
    });
 
    $('#singeplayerButton').on('click', function(e){
@@ -103,25 +116,15 @@ $(document).ready();
       e.preventDefault();
       console.log('song button');
    });
-});
-
-$(function() {
-  counter = 0;
-
-  $('#personHead').css({'display':'none'});
-  $('#personBody').css({'display':'none'});
-
-  $('#triggerEvent').on('click', function(e) {
-    e.preventDefault();
-    counter++;
-
-    switch(counter) {
-      case 1:
-        $('#personHead').css({'display':'block'});
-        break;
-      case 2:
-        $('#personBody').css({'display':'block'});
-        break;
-    }
-  });
+   let playerWordInput;
+   console.log(playerWordInput);
+   /*
+   $('#alphabet .letter').on('click', function(e) {
+     for (let l in playerWordInput) {
+       if($(this).text()=== playerWordInput[l]) {
+        $('span.letter').eq(l).show();
+     }
+        }
+   });
+   */
 });
